@@ -3,8 +3,9 @@
 import re, requests, sys, bs4, subprocess, os
 
 def main():
-	if len(sys.argv) != 3:
-		sys.stderr.write("Usage: {0} <artist name> <song title>\n".format(sys.argv[0]))
+	if len(sys.argv) != 4:
+		sys.stderr.write("Usage: {0} (artist name) (song title) (path to espeak)\n".format(sys.argv[0]))
+		sys.stderr.write("Perhaps you didn't put quotes around the song title and the artist's name.\n")
 		sys.exit(-1)
 
 	urlFormat = "http://www.metrolyrics.com/{songTitle}-lyrics-{artist}.html"
@@ -23,7 +24,7 @@ songTitle=re.sub(" ", "-", sys.argv[2]))
 		if "class" in tag.attrs and tag.attrs["class"][0] == "verse":
 			for content in tag.contents:
 				text = re.sub("<[^>]*>", "", str(content))
-				retVal = os.system("echo \"{0}\" | /usr/bin/espeak".format(text))
+				retVal = os.system("echo \"{0}\" | {1}".format(text, sys.argv[3]))
 
 				if retVal != 0:
 					sys.stderr.write("espeak failed with error code {0}\n".format(retVal))
