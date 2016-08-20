@@ -1,3 +1,7 @@
+LICENSING:
+
+This software is licensed under the GNU GPLv3.
+
 INSTALLATION:
 
 This software is targeted toward Linux and Mac OSX platforms. It is not guaranteed to work on Windows.
@@ -12,11 +16,11 @@ RUNNING THE SOFTWARE:
 
 open a terminal, cd to the directory where you installed this library, and type
 
-./getLyrics.py <your favorite artist> <your favorite song> | /usr/bin/espeak
+./getLyrics.py <your favorite artist> <your favorite song>
 
 For example, to listen to Jimmy Eat World's "The Middle", run this command:
 
-./getLyrics.py "Jimmy Eat World" "The Middle" | /usr/bin/espeak
+./getLyrics.py "Jimmy Eat World" "The Middle"
 
 TROUBLESHOOTING AND FREQUENTLY ASKED QUESTIONS:
 

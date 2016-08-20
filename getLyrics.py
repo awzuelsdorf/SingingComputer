@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-import re, requests, sys, bs4
+import re, requests, sys, bs4, subprocess, os
 
 def main():
 	if len(sys.argv) != 3:
@@ -8,7 +8,8 @@ def main():
 		sys.exit(-1)
 
 	urlFormat = "http://www.metrolyrics.com/{songTitle}-lyrics-{artist}.html"
-	url = urlFormat.format(artist=re.sub(" ", "-", sys.argv[1]), songTitle=re.sub(" ", "-", sys.argv[2]))
+	url = urlFormat.format(artist=re.sub(" ", "-", sys.argv[1]),\
+songTitle=re.sub(" ", "-", sys.argv[2]))
 
 	resp = requests.get(url, allow_redirects=True)
 
@@ -18,14 +19,15 @@ def main():
 
 	html = bs4.BeautifulSoup(resp.text, "html.parser")
 
-	tempFile = open("/tmp/temp.html", "w")
-
 	for tag in html.find_all('p'):
 		if "class" in tag.attrs and tag.attrs["class"][0] == "verse":
 			for content in tag.contents:
-				sys.stdout.write(re.sub("<[^>]*>", "", str(content)) + "\n")
+				text = re.sub("<[^>]*>", "", str(content))
+				retVal = os.system("echo \"{0}\" | /usr/bin/espeak".format(text))
 
-	tempFile.close()
+				if retVal != 0:
+					sys.stderr.write("espeak failed with error code {0}\n".format(retVal))
+					sys.exit(-1)
 
 if __name__ == "__main__":
     main()
