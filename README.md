@@ -14,4 +14,26 @@ open a terminal, cd to the directory where you installed this library, and type
 
 ./getLyrics.py <your favorite artist> <your favorite song> | /usr/bin/espeak
 
-PLEASE replace all spaces in the artist and song's name with dashes.
+For example, to listen to Jimmy Eat World's "The Middle", run this command:
+
+./getLyrics.py "Jimmy Eat World" "The Middle" | /usr/bin/espeak
+
+TROUBLESHOOTING AND FREQUENTLY ASKED QUESTIONS:
+
+Question: I found a bug. How can I report it?
+
+Answer: Please create an issue report on this project's Github page:
+https://github.com/awzuelsdorf/SingingComputer .
+I will fix it as soon as possible.
+
+Question: I wasn't able to listen to (a song title) by (an artist)
+
+Answer: Please make sure you wrap the artists's name and the song's name in
+quotes. For example, if you wanted to listen to "Bad Romance" by Lady Gaga,
+you WOULD NOT use this command: 
+
+./getLyrics.py Lady Gaga Bad Romance
+
+You WOULD use this command:
+
+./getLyrics.py "Lady Gaga" "Bad Romance"

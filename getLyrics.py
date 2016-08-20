@@ -8,8 +8,8 @@ def main():
 		sys.exit(-1)
 
 	urlFormat = "http://www.metrolyrics.com/{songTitle}-lyrics-{artist}.html"
-	url = urlFormat.format(artist=sys.argv[1], songTitle=sys.argv[2])
-    
+	url = urlFormat.format(artist=re.sub(" ", "-", sys.argv[1]), songTitle=re.sub(" ", "-", sys.argv[2]))
+
 	resp = requests.get(url, allow_redirects=True)
 
 	if str(resp.status_code) != "200":
@@ -23,7 +23,7 @@ def main():
 	for tag in html.find_all('p'):
 		if "class" in tag.attrs and tag.attrs["class"][0] == "verse":
 			for content in tag.contents:
-				print(re.sub("<[^>]*>", "", str(content)))
+				sys.stdout.write(re.sub("<[^>]*>", "", str(content)) + "\n")
 
 	tempFile.close()
 
