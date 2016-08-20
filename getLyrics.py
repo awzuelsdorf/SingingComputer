@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-import re, requests, os, sys, bs4
+import re, requests, sys, bs4
 
 def main():
 	if len(sys.argv) != 3:
