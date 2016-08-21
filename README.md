@@ -4,10 +4,11 @@ This software is licensed under the GNU GPLv3.
 
 INSTALLATION:
 
-This software is targeted toward Linux and Mac OSX platforms. It is not guaranteed to work on Windows.
+This software was developed and tested on Ubuntu 16.04 64-bit Linux.
+It should work on Windows or Mac OSX.
 
-To install this software, run setup.sh. If setup.sh fails, please ensure that you have python version 3, espeak,
-and these Python 3 libraries installed:
+To install this software, run setup.sh. If setup.sh fails, please ensure that
+you have python version 3, espeak, and these Python 3 libraries installed:
 
 requests
 beautifulsoup4
@@ -16,7 +17,7 @@ RUNNING THE SOFTWARE:
 
 open a terminal, cd to the directory where you installed this library, and type
 
-./getLyrics.py <your favorite artist> <your favorite song>
+./getLyrics.py <your favorite artist> <your favorite song> /path/to/espeak
 
 For example, to listen to Jimmy Eat World's "The Middle", run this command:
 
@@ -30,14 +31,25 @@ Answer: Please create an issue report on this project's Github page:
 https://github.com/awzuelsdorf/SingingComputer .
 I will fix it as soon as possible.
 
-Question: I wasn't able to listen to (a song title) by (an artist)
+Question: The program didn't work. I got a message about "Usage" instead.
+What is going on?
 
-Answer: Please make sure you wrap the artists's name and the song's name in
-quotes. For example, if you wanted to listen to "Bad Romance" by Lady Gaga,
+Answer: Please make sure you put quotes around the artists's name and the
+song's name. Also, make sure you are including the path to espeak.
+For example, if you wanted to listen to "Bad Romance" by Lady Gaga,
 you WOULD NOT use this command: 
 
 ./getLyrics.py Lady Gaga Bad Romance
 
+because there is no path to espeak and you didn't put quotes around both the
+artist's name and the song's name
+
 You WOULD use this command:
 
-./getLyrics.py "Lady Gaga" "Bad Romance"
+./getLyrics.py "Lady Gaga" "Bad Romance" /usr/bin/espeak
+
+Question: The program says it couldn't find my song. What is going on?
+
+Answer: Please make sure that you spelled the artist's name correctly
+and the song's name correctly. If that doesn't work, then please submit
+a bug report that includes the EXACT command that you used.

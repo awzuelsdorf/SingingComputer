@@ -5,7 +5,7 @@ import re, requests, sys, bs4, subprocess, os
 def main():
 	if len(sys.argv) != 4:
 		sys.stderr.write("Usage: {0} (artist name) (song title) (path to espeak)\n".format(sys.argv[0]))
-		sys.stderr.write("Perhaps you didn't put quotes around the song title and the artist's name.\n")
+		sys.stderr.write("Perhaps you didn't put quotes around the song title and the artist's name?\n")
 		sys.exit(-1)
 
 	urlFormat = "http://www.metrolyrics.com/{songTitle}-lyrics-{artist}.html"
