@@ -28,6 +28,8 @@ sys.argv[2]))
 			espeakPath = "/usr/bin/say"
 		elif os.path.isfile("/usr/bin/espeak") and os.access("/usr/bin/espeak", os.X_OK):
 			espeakPath = "/usr/bin/espeak"
+		elif os.path.isfile("C:\\Program Files (x86)\\eSpeak\\command_line\\espeak.exe") and os.access("C:\\Program Files (x86)\\eSpeak\\command_line\\espeak.exe", os.X_OK):
+			espeakPath = "C:\\Program Files (x86)\\eSpeak\\command_line\\espeak.exe"
 		else:
 			sys.stderr.write("Could not find espeak or say. Please make sure the path\n")
 			sys.stderr.write("you entered is valid and then try again.\n")
@@ -39,21 +41,24 @@ sys.argv[2]))
 			sys.stderr.write("you entered is valid and then try again.\n")
 			sys.exit(-1)
 
+	totalText = ""
+
 	for tag in html.find_all('p'):
 		if "class" in tag.attrs and tag.attrs["class"][0] == "verse":
 			for content in tag.contents:
 				#Remove extra <br>, </br>, and <br /> tags.
 				text = re.sub("<[^>]*>", "", str(content))
+				totalText += text.strip() + ", "
 
-				#Let espeak do its work
-				retVal = os.system("echo \"{0}\" | {1}".format(text, espeakPath))
+	#Let espeak do its work
+	retVal = os.system("echo \"{0}\" | \"{1}\"".format(totalText, espeakPath))
 
-				#Did espeak/say work?
-				if retVal != 0:
-					sys.stderr.write("Could not play song \"{0}\" by \"{1}\".\n".format(\
+	#Did espeak/say work?
+	if retVal != 0:
+		sys.stderr.write("Could not play song \"{0}\" by \"{1}\".\n".format(\
 sys.argv[2], sys.argv[1]))
-					sys.stderr.write("Please make sure your path to espeak or say is correct.\n")
-					sys.exit(-1)
+		sys.stderr.write("Please make sure your path to espeak or say is correct.\n")
+		sys.exit(-1)
 
 if __name__ == "__main__":
     main()
